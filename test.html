@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" integrity="sha512-5A8nwdMOWrSz20fDsjczgUidUBR8liPYU+WymTZP1lmY9G6Oc7HlZv156XqnsgNUzTyMefFTcsFH/tnJE/+xBg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Light Life Electrical</title>
+    <link rel="icon" type="image/x-icon" href="LL-Images/Favicon Transparent.ico">
+    
+
+<!--CSS-->
+
+    <style>
+/* General Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        @font-face {
+            font-family: Kiona-Regular;
+            src: url(kiona_2/Kiona-Regular.ttf);
+        }
+
+        .roboto-light {
+            font-family: "Roboto", sans-serif;
+            font-weight: 300;
+            font-style: normal;
+        }
+
+        body {
+            line-height: 1.6;
+            font-family: Kiona-Regular, Roboto, sans-serif;
+            background-color: black;
+        }
+
+/* Navigation Bar */
+        header {
+            position: sticky;
+            top: 0;
+            background-color: black;
+            z-index: 1000;
+            padding: 5px 20px;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        .navbar .logo img {
+            height: 85px; 
+        }
+
+        .nav-links {
+            list-style-type: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 20px;
+            font-size: 25px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .nav-links li a:hover {
+            background-color: #FC832B;
+            border-radius: 5px;
+            color: black;
+        }
+
+
+
+/* Section Styles */
+        .section {
+            padding: 0;
+            height: 80vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+            color: white;
+        }
+
+        .content {
+            opacity: 0;
+            transition: transform 2s ease-in-out, opacity 2s ease-in-out;
+        }
+
+
+        #home .content {
+            opacity: 1; 
+        }
+
+/* Slide from Left */
+        .slide-left {
+            transform: translateX(-100%);
+        }
+
+        .in-view-left {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .out-view-left {
+            transform: translateX(-100%);
+            opacity: 0;
+        }
+
+/* Slide from Right */
+        .slide-right {
+            transform: translateX(100%);
+        }
+
+        .in-view-right {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .out-view-right {
+            transform: translateX(100%);
+            opacity: 0;
+        }
+
+
+
+
+/*Home section*/
+        .video-container {
+            position: relative;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+        }
+
+/* Video Styling */
+        #background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%; 
+            object-fit: cover;
+            z-index: -1;
+            }
+
+/* Title, Subtitle, and Button Styling */
+        #home-button {
+            position: absolute;
+            top: 49%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1; 
+            width:auto;
+            opacity: 0;
+            font-size: 40px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            animation: fadeIn 14.97s ease-in-out infinite; 
+        }
+
+        #home-title {
+            position: absolute;
+            top: 20%;
+            left: 48%;
+            transform: translate(-50%, -50%);
+            color: white;
+            text-align: center;
+            z-index: 1;
+            font-size: 30px;
+        }
+
+/*About Section*/
+        .about-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-column-left {
+            flex: 1;
+            min-width: 300px; 
+            padding: 20px;
+        }
+
+        .about-column-right {
+            flex: 1;
+            min-width: 300px; 
+            padding: 20px;
+        }
+
+        .team-photo {
+            vertical-align: middle;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+        }
+
+
+
+/* Polaroid style */
+        .carousel-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden; /* Hide overflow to show images only inside the container */
+        }
+
+        .polaroid-container {
+            display: flex;
+            gap: 20px;
+            padding: 10px 0;
+            scroll-behavior: smooth; /* Smooth scrolling when moving */
+            width: 80%; /* Adjust the width to fit images and arrows */
+            max-width: 80%;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+
+        .polaroid {
+            background-color: white;
+            padding: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+            flex-shrink: 0; /* Prevent shrinking of polaroids */
+            transition: transform 0.3s ease;
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-bottom: 5px solid #fff;
+        }
+
+        .polaroid p {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+
+        .polaroid:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+
+/* Arrow styling*/
+
+.arrow {
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    font-size: 2rem;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+    outline: none;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;  /*Set relative for new layout */
+    top: 0; /* Remove the 'top' offset from before */
+    transform: translateY(0); /* Remove vertical centering */
+    margin: 0 10px; /* Add spacing to push arrows away from title */
+}
+
+/* Left Arrow */
+
+.left-arrow {
+    float: left; /* Float left */
+}
+
+/* Right Arrow */
+.right-arrow {
+    float: right; /* Float right */
+}
+
+/* Arrow Hover Effect */
+.arrow:hover {
+    color: #FC832B; 
+}
+
+/* Arrow background stays the same */
+.arrow:hover {
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+
+.gallery-title {
+    font-size: 40px;
+    text-align: center;
+    margin: 0;
+}
+
+
+
+/*Contact*/
+        .ffbox {
+            width: 100%;
+            max-width: 500px;
+            background-color: #ffffff54;
+            border: 3px solid #ffffffbe;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            font-family: Kiona-Regular;
+            padding: 10px; 
+            font-size: 13px;
+        }
+
+        .ffbox {
+            flex: 1;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .ffbox label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 15px;
+            margin-right: 16px;
+        }
+
+        .ffbox input,
+        .ffbox textarea {
+            display: block;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 15px;
+            background-color: #dcdce1;
+            border: none;
+            padding-left: 10px;
+            margin-bottom: 10px;
+        }
+
+        .ffbox textarea {
+            resize: vertical;
+        }
+
+        .map-div {
+            background-color: #ffffffbe;
+            width: 100%;
+            height: 100%; 
+            max-width: 500px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .map-div iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+            min-height: 300px;
+            border: 0;
+        }
+
+
+        #home-button {
+            width: 40%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            border-radius: 15px;
+            background-color: black;
+            color: #FC832B;
+            font-size: 40px;
+            font-weight: 700;
+            border: rgba(0, 0, 0, 0.1);
+            font-family: Kiona-Regular;
+        }
+
+        #home-button:hover {
+            background-color: #FC832B;
+            color:black;
+        }
+
+        #home-button a {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+        width: 100%;
+        height: 100%;
+        }
+
+        .map-div iframe {
+            border: 0;
+            padding: 1px;
+            width: 100%;
+            height: 100%; 
+            min-height: 300px; 
+            border-radius: 10px;
+            max-width: 500px;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .contact-column {
+            padding: 20px;
+        }
+
+        .contact-column-middle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .contact-column-right {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+        }
+
+
+
+
+
+
+/* Footer Styles */
+        footer {
+            display: flex;
+            justify-content: space-around;
+            background-color: black;
+            padding: 10px;
+        }
+
+        .footer-column {
+            flex: 1;
+            padding: 10px;
+        }
+
+        .footer-column h3 {
+            margin-bottom: 10px;
+            color: #FC832B;
+        }
+
+        .footer-column ul {
+            list-style-type: none;
+        }
+
+        .footer-column ul li a,
+        .footer-column a { 
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-column ul li a:hover,
+        .footer-column a:hover { 
+            color: #FC832B;
+            text-decoration: none;
+        }
+
+/* Social Media Icons */
+        .fa {
+            padding: 15px;
+            font-size: 30px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .fa:hover {
+            opacity: 0.7;
+            color: white;
+        }
+
+        .fa-facebook {
+            background: #3B5998;
+            color: white;
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            transition: .2s linear;
+            width: 58px;
+        }
+
+        .fa-instagram {
+            position: absolute;
+            background: radial-gradient(circle at 30% 110%,
+                #ffdb8b 0%,
+                #ee653d 25%,
+                #d42e81 50%,
+                #a237b6 75%,
+                #3e57bc 100%);
+            border-radius: 10px;
+            justify-content: center;
+            align-items: center;
+            transition: .2s linear;
+        }
+
+/* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                margin-top: 10px;
+            }
+
+            .nav-links li {
+                margin: 10px 0;
+            }
+
+            .navbar .logo img {
+                height: 40px; 
+            }
+
+            .footer-column {
+                padding: 10px 0;
+                text-align: center;
+            }
+
+            .navbar ul {
+                padding: 0;
+            }
+
+            .navbar ul li {
+                display: block;
+                margin: 10px 0;
+            }
+
+            .ffbox, .map-div {
+                max-width: 100%; 
+                padding: 10px; 
+            }
+
+            .polaroid-container {
+                padding: 10px;
+            }
+
+            .polaroid {
+                width: 150px;
+            }
+
+            .about-container {
+                flex-direction: column; 
+            }
+
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+
+            .about-column {
+                padding: 10px;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0; 
+            }
+            40% {
+                opacity: 0; 
+            }
+            50% {
+                opacity: 0;
+            }
+            80% {
+                opacity: 1; 
+            }
+            100% {
+                opacity: 1; 
+            }
+        }
+
+    </style>
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<body>
+<!--HTML-->
+
+<!-- Navigation Bar -->
+<header>
+    <nav class="navbar">
+        <div class="logo">
+            <a href="#home"><img src="LL-Images/Original Logo.png" alt="Light Life Electrical Logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#services">SERVICES</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#gallery">GALLERY</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </nav>
+</header>
+
+<!-- Home Section -->
+<main>
+    <section id="home" class="section">
+        <div class="content">
+        <div class="video-container">
+            <video autoplay muted loop id="background-video">
+                <source src="LL-Images/bulbvideo.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video> 
+        <div id="home-title">
+            <img src="LL-Images/Transparent Logo.png" style="width: 600px">
+        </div>
+        <a href="https://book.servicem8.com/request_booking?uuid=e882be6b-9d5f-4239-a713-21cce0a30a4b" target="_blank">
+            <button type="button" id="home-button">Book Now!</button>
+        </a>
+        </div>
+        </div>
+    </section>
+
+<!-- Services Section -->
+    <section id="services" class="section">
+        <div class="content slide-right">
+            <h1 style="font-size:40px">Our Services</h1>
+            <p>We provide a comprehensive range of electrical services tailored to meet the needs of various industries, including:<br>
+                -Lighting Installations<br>
+                -General Power Installations<br>
+                -Data/WiFi Installations<br>
+                -CCTV Installations<br>
+                -Electric Vehicle Chargers<br>
+                -Emergency Lighting<br>
+                -Storage Heaters<br>
+                -Heating Wiring and Fault Finding<br>
+                -Smart Home Installations<br>
+                And much more! Contact us today to learn how we can assist with your specific electrical needs.
+            </p>
+        </div>
+    </section>
+
+   <!-- About Section -->
+<section id="about" class="section">
+    <div class="content slide-left about-container">
+        <div class="about-column-left">
+            <h1 style="font-size:40px">About Us</h1>
+            <p style="font-size:20px">Based in Leighton Buzzard, we are a dynamic and growing company proudly serving the Herts, Beds, and Bucks regions.<br>
+            With 16 years of expertise in all aspects of electrical installations, we bring a wealth of knowledge and experience to every project.<br>
+            Our commitment to quality and customer satisfaction drives us to deliver exceptional service, tailored to meet the unique needs of each client.</p>
+        </div>
+        <div class="about-column-right">
+            <h2 style="font-size:40px">Meet the Team:</h2>
+            <img class="team-photo" src="LL-Images/default-avatar.png">
+            <h3><u>Matt - Director</u></h3>
+            <p>16 years experience.(cont.)</p>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Gallery Section -->
+    <section id="gallery" class="section">
+        <div class="content slide-right">
+            <button class="arrow left-arrow" id="left-arrow">&#9664;</button> <!-- Left Arrow -->
+            <h2 class="gallery-title">Gallery</h2>
+            <button class="arrow right-arrow" id="right-arrow">&#9654;</button> <!-- Right Arrow -->
+            <div class="carousel-wrapper">
+                <div class="polaroid-container">
+<!-- Polaroid Item 1 -->
+                    <div class="polaroid">
+                        <a target="_blank" href="LL-Images/garden1.jpg">
+                            <img src="LL-Images/garden1.jpg" alt="Polaroid Image 1">
+                        </a>
+                        <p>Exterior Light Installation</p>
+                    </div>
+            
+<!-- Polaroid Item 2 -->
+                    <div class="polaroid">
+                        <a target="_blank" href="LL-Images/kitchen1.jpg">
+                            <img src="LL-Images/kitchen1.jpg" alt="Polaroid Image 2">
+                        </a>
+                        <p>Wall Light Installation</p>
+                    </div>
+            
+<!-- Polaroid Item 3 -->
+                    <div class="polaroid">
+                        <a target="_blank" href="LL-Images/kitchen2.jpg">
+                            <img src="LL-Images/kitchen2.jpg" alt="Polaroid Image 3">
+                        </a>
+                        <p>Pendant Light Installation</p>
+                    </div>
+            
+<!-- Polaroid Item 4 -->
+                    <div class="polaroid">
+                        <a target="_blank" href="LL-Images/thermostat1.jpg">
+                            <img src="LL-Images/thermostat1.jpg" alt="Polaroid Image 4">
+                        </a>
+                        <p>Hive Thermostat Installation</p>
+                    </div>
+<!-- Polaroid Item 5 -->
+                    <div class="polaroid">
+                        <a target="_blank" href="LL-Images/floodlight1.jpg">
+                            <img src="LL-Images/floodlight1.jpg" alt="Polaroid Image 5">
+                        </a>
+                        <p>Floodlight Installation</p>
+                    </div>  
+<!-- Polaroid Item 6 -->
+                    <div class="polaroid">
+                        <a target="_blank" href="LL-Images/double socket.jpg">
+                            <img src="LL-Images/double socket.jpg" alt="Polaroid Image 6">
+                        </a>
+                        <p>Double Socket Installation</p>
+                    </div>
+<!-- Polaroid Item 7 -->
+                    <div class="polaroid">
+                        <a target="_blank" href="LL-Images/emergency call out.jpg">
+                            <img src="LL-Images/emergency call out.jpg" alt="Polaroid Image 7">
+                        </a>
+                        <p>Emergency Callout</p>
+                    </div>                                      
+                </div>
+
+                </div>
+    </section>
+
+<!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="content slide-left contact-container">
+            <div class="contact-column">
+            <div style="text-align:center; font-size:40px">Contact us</div>
+            <p style="font-size:20px; text-align: center;">Whether you have a question, need a quote, or are ready to start your next project, we're here to help.<br>
+                <br><u>Service Areas:</u><br> <b>Herts, Beds, and Bucks.</b><br><br>We're eager to assist you with all your electrical needs.<br> <br>
+                Get in touch with us today!</p>
+                </div>
+
+<!-- Middle Column for Form -->
+<div class="contact-column contact-column-middle">
+    <div class="ffbox">
+        <form id="form" action="https://api.web3forms.com/submit" method="POST">
+            <input type="hidden" name="access_key" value="feed4777-e198-418d-8d91-1b1a1d63744b">
+            <label for="fullName">
+                <i class="fa fa-solid fa-user" style="margin: 2px; font-size: 20px;"></i> Full Name:
+            </label>
+            <input type="text" id="fullName" name="fullName" required>
+
+            <label for="email">
+                <i class="fa fa-solid fa-envelope" style="margin: 2px; font-size: 20px;"></i> Email Address:
+            </label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="mobile">
+                <i class="fa fa-solid fa-phone" style="margin: 2px; font-size: 20px;"></i> Contact No:
+            </label>
+            <input type="tel" id="mobile" name="mobile" required>
+
+            <label for="msg">
+                <i class="fa fa-solid fa-comment" style="margin: 2px; font-size: 20px;"></i> Write Message:
+            </label>
+            <textarea id="msg" name="msg" rows="5" required></textarea>
+            <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+            
+            <button type="submit">Submit</button>
+            <div id="result"></div>
+        </form>
+    </div>
+</div>
+
+<div class="contact-column">
+    <div class="map-div">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d39371.48957077558!2d-0.704106185429629!3d51.92085414582537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x48764e08c08bc8a9%3A0xb6dd641c95115264!2sLeighton%20Buzzard!5e0!3m2!1sen!2suk!4v1725822117783!5m2!1sen!2suk" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+</div>
+</div>
+</section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-column">
+        <h3>CONTACT</h3>
+        <p><a href="mailto:info@light-life-electrical.co.uk"><i class="fa fa-envelope" style="color: #FC832B;"></i> info@light-life-electrical.co.uk</a>
+        </p>
+        <p><a href="tel:07802365022"><i class="fa fa-phone" style="color: #FC832B;"></i> 07802 365022</a>
+        </p>
+        <p><a href="https://www.google.com/maps/place/30+Johnson+Dr,+Leighton+Buzzard+LU7+4TP/@51.9069048,-0.6503856,17z/data=!3m1!4b1!4m6!3m5!1s0x4876513c4f597ee3:0xf615614e552fba66!8m2!3d51.9069048!4d-0.6503856!16s%2Fg%2F11sv86v0f0?entry=ttu&g_ep=EgoyMDI0MTAxNi4wIKXMDSoASAFQAw%3D%3D" target="_blank"><i class="fa fa-home" aria-hidden="true" style="color: #FC832B;"></i>
+        30 Johnson Drive, Leighton Buzzard, LU7 4TP</a></p>
+    </div>
+    <div class="footer-column">
+        <h3>LINKS</h3>
+        <ul>
+            <li><a href="#home">HOME</a></li>
+            <li><a href="#services">SERVICES</a></li>
+            <li><a href="#about">ABOUT</a></li>
+            <li><a href="#gallery">GALLERY</a></li>
+            <li><a href="#contact">CONTACT</a></li>
+        </ul>
+    </div>
+    <div class="footer-column">
+        <h3>HOURS:</h3>
+       <p style="color:white;"><u><b>Mon - Fri</b></u><br> 
+        08:00 am - 06:00 pm<br>
+        <u><b>Sat</b></u><br> 
+        09:00 am - 02:00 pm<br>
+        <u><b>Sun</b></u><br> 
+        Closed</p>
+    </div>
+    <div class="footer-column">
+        <h3>SOCIAL MEDIA</h3>
+        <p><a href="https://www.facebook.com/profile.php?id=61564860371309" class="fa fa-facebook" target="_blank"></a>
+            <a href="https://www.instagram.com/lightlifeelectrical/" class="fa fa-instagram" target="_blank"></a>
+        </p>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--JavaScript-->
+
+<!-- Scroll Animations -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll(".section");
+
+        function isInViewport(el) {
+            const rect = el.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom > 0;
+        }
+
+        function handleScroll() {
+        sections.forEach(section => {
+            const content = section.querySelector('.content');
+            if (section.id === 'home') {
+                return;
+            }
+                    
+                if (isInViewport(section)) {
+                    if (content.classList.contains('slide-left')) {
+                        content.classList.add('in-view-left');
+                        content.classList.remove('out-view-left');
+                    } else if (content.classList.contains('slide-right')) {
+                        content.classList.add('in-view-right');
+                        content.classList.remove('out-view-right');
+                    }
+                } else {
+                    if (content.classList.contains('slide-left')) {
+                        content.classList.add('out-view-left');
+                        content.classList.remove('in-view-left');
+                    } else if (content.classList.contains('slide-right')) {
+                        content.classList.add('out-view-right');
+                        content.classList.remove('in-view-right');
+                    }
+                }
+            });
+        }
+
+        window.addEventListener("scroll", handleScroll);
+        handleScroll(); 
+    });
+
+//Contact section JS//
+const form = document.getElementById('form');
+const result = document.getElementById('result');
+
+form.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(form);
+  const object = Object.fromEntries(formData);
+  const json = JSON.stringify(object);
+  result.innerHTML = "Please wait..."
+
+    fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: json
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                result.innerHTML = "Form submitted successfully";
+            } else {
+                console.log(response);
+                result.innerHTML = json.message;
+            }
+        })
+        .catch(error => {
+            console.log(error);
+            result.innerHTML = "Something went wrong!";
+        })
+        .then(function() {
+            form.reset();
+            setTimeout(() => {
+                result.style.display = "none";
+            }, 3000);
+        });
+});
+
+// JavaScript for horizontal scrolling with arrows
+document.addEventListener('DOMContentLoaded', function() {
+    const polaroidContainer = document.querySelector('.polaroid-container');
+    const leftArrow = document.getElementById('left-arrow');
+    const rightArrow = document.getElementById('right-arrow');
+
+    // Amount of pixels to scroll with each click
+    const scrollAmount = 320; // Adjust this based on the width of polaroid + gap
+
+    // Event listener for right arrow (scrolls right)
+    rightArrow.addEventListener('click', function() {
+        polaroidContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    // Event listener for left arrow (scrolls left)
+    leftArrow.addEventListener('click', function() {
+        polaroidContainer.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+});
+
+</script>
+</body>
+</html>
